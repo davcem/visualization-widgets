@@ -11,7 +11,7 @@ HACKAGRAPH.DataHandler = function (vis_obj, init_data) {
     this.processed_data_ = {
         kws: [],
         docs: [],
-        edgeds: []
+        edges: []
     };
     this.e_data_ = init_data;
     /** @type{HACKAGRAPH.Vis} vis_**/
@@ -101,7 +101,7 @@ HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
                 target: 'kw_' + kw
             }
         }
-        this.processed_data_.edgeds.push(edge);
+        this.processed_data_.edges.push(edge);
     }
 };
 
@@ -120,6 +120,9 @@ HACKAGRAPH.DataHandler.prototype.createKwNode_ = function (kw) {
  * Return Process Data
  */
 HACKAGRAPH.DataHandler.prototype.getProcessedData = function () {
-
-    return this.processed_data_;
+    var ret = [];
+    ret.push.apply(ret, this.processed_data_.docs);
+    ret.push.apply(ret, this.processed_data_.kws);
+    ret.push.apply(ret, this.processed_data_.edges);
+    return ret;
 };
