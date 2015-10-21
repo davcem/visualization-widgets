@@ -50,7 +50,7 @@
         
         $root.append($inner);
 
-        hackathon_vis.init();
+        hackathon_vis.init(receivedData);
     };
 
     // indexArray: array with items' indices to highlight. They match items in receivedData (parameter in Render.draw)

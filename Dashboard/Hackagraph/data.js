@@ -74,17 +74,14 @@ HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
             id: 'doc_' + doc.index,
             res_index: doc.index
             //parent: 'nparent',
-        },
-        scratch: {
-            foo: 'bar'
-        },
-        position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
-        selected: false,
-        selectable: true,
-        locked: false,
-        grabbable: true,
-        classes: 'foo bar',
-        style: {'background-color': 'red'}
+        }
+        //position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
+        /* selected: false,
+         selectable: true,
+         locked: false,
+         grabbable: true,
+         classes: 'foo bar',
+         style: {'background-color': 'red'} */
     };
 
     this.processed_data_.docs.push(node);
@@ -109,8 +106,8 @@ HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
 HACKAGRAPH.DataHandler.prototype.createKwNode_ = function (kw) {
     var node = {
         group: 'nodes',
-        data: {id: 'kw_' + kw, kw_name: kw},
-        position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)}
+        data: {id: 'kw_' + kw, kw_name: kw}
+        //position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)}
     };
 
     this.processed_data_.kws.push(node);
