@@ -92,7 +92,7 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .stylesheet()
             .selector('node')
             .css({
-                'content': 'data(id)'
+                'content': 'data(titel)'
             })
             .selector('edge')
             .css({
@@ -109,28 +109,52 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
                 'target-arrow-color': '#61bffc',
                 'transition-property': 'background-color, line-color, target-arrow-color',
                 'transition-duration': '0.5s'
+            })
+            .selector('node[type="Book"]')
+            .css(
+            {
+                'background-color' : 'green'
+            })
+            .selector('node[type="Publication"]')
+            .css(
+            {
+                'background-color' : 'red'
             }),
-
         elements: {
             nodes: [{
                 data: {
-                    id: 'a'
+                    id: 'a',
+                    titel: 'document1',
+                    provider: 'Wissensmedia',
+                    type: 'Publication'
                 }
             }, {
                 data: {
-                    id: 'b'
+                    id: 'b',
+                        titel: 'document2',
+                        provider: 'Wissensmedia',
+                        type: 'Publication'
                 }
             }, {
                 data: {
-                    id: 'c'
+                    id: 'c',
+                    titel: 'document3',
+                    provider: 'Wissensmedia',
+                    type: 'Book'
                 }
             }, {
                 data: {
-                    id: 'd'
+                    id: 'd',
+                    titel: 'document4',
+                    provider: 'Wissensmedia',
+                    type: 'Book'
                 }
             }, {
                 data: {
-                    id: 'e'
+                    id: 'e',
+                    titel: 'document5',
+                    provider: 'Wissensmedia',
+                    type: 'Picture'
                 }
             }],
 
