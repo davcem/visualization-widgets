@@ -3,6 +3,7 @@ var HACKAGRAPH = HACKAGRAPH || {};
 
 HACKAGRAPH.Vis = function () {
     this.data_handler_ = null;
+    this.graph_data = [];
 };
 
 
@@ -46,7 +47,9 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
  * @param {array} data  Processed data by the @see{HACKAGRAPH.DataHandler}
  */
 HACKAGRAPH.Vis.prototype.update = function (graph_data) {
-
+    
+    this.graph_data = graph_data;
+    
     //Update the graph here!
     console.log("UPDATING THE GRAPH WITH DATA ", graph_data);
 
@@ -55,6 +58,7 @@ HACKAGRAPH.Vis.prototype.update = function (graph_data) {
 HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
     console.log("cytoscape initialize start");
+    console.log(this.graph_data);
 
     cy = cytoscape({
         container: document.getElementById('cy'),
@@ -120,96 +124,7 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             {
                 'background-color' : 'red'
             }),
-        elements: {
-            nodes: [{
-                data: {
-                    id: 'a',
-                    titel: 'document1',
-                    provider: 'Wissensmedia',
-                    type: 'Publication'
-                }
-            }, {
-                data: {
-                    id: 'b',
-                        titel: 'document2',
-                        provider: 'Wissensmedia',
-                        type: 'Publication'
-                }
-            }, {
-                data: {
-                    id: 'c',
-                    titel: 'document3',
-                    provider: 'Wissensmedia',
-                    type: 'Book'
-                }
-            }, {
-                data: {
-                    id: 'd',
-                    titel: 'document4',
-                    provider: 'Wissensmedia',
-                    type: 'Book'
-                }
-            }, {
-                data: {
-                    id: 'e',
-                    titel: 'document5',
-                    provider: 'Wissensmedia',
-                    type: 'Picture'
-                }
-            }],
-
-            edges: [{
-                data: {
-                    id: 'a"e',
-                    weight: 1,
-                    source: 'a',
-                    target: 'e'
-                }
-            }, {
-                data: {
-                    id: 'ab',
-                    weight: 3,
-                    source: 'a',
-                    target: 'b'
-                }
-            }, {
-                data: {
-                    id: 'be',
-                    weight: 4,
-                    source: 'b',
-                    target: 'e'
-                }
-            }, {
-                data: {
-                    id: 'bc',
-                    weight: 5,
-                    source: 'b',
-                    target: 'c'
-                }
-            }, {
-                data: {
-                    id: 'ce',
-                    weight: 6,
-                    source: 'c',
-                    target: 'e'
-                }
-            }, {
-                data: {
-                    id: 'cd',
-                    weight: 2,
-                    source: 'c',
-                    target: 'd'
-                }
-            }, {
-                data: {
-                    id: 'de',
-                    weight: 7,
-                    source: 'd',
-                    target: 'e'
-                }
-            }]
-        },
-
+        elements: this.graph_data,
         layout: {
             name: 'breadthfirst',
             directed: true,
