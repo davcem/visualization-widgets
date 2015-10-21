@@ -117,9 +117,9 @@ HACKAGRAPH.DataHandler.prototype.createKwNode_ = function (kw) {
  * Return Process Data
  */
 HACKAGRAPH.DataHandler.prototype.getProcessedData = function () {
-    var ret = [];
-    ret.push.apply(ret, this.processed_data_.docs);
-    ret.push.apply(ret, this.processed_data_.kws);
-    ret.push.apply(ret, this.processed_data_.edges);
-    return ret;
+    var nodes = [];
+    nodes.push.apply(nodes, this.processed_data_.docs);
+    nodes.push.apply(nodes, this.processed_data_.kws);
+    //ret.push.apply(ret, this.processed_data_.edges);
+    return {nodes: nodes, edges: this.processed_data_.edges};
 };
