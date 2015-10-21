@@ -99,12 +99,12 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .stylesheet()
             .selector('node')
             .css({
-                'content': 'data(titel)'
+                'content': 'data(id)'
             })
             .selector('edge')
             .css({
                 'target-arrow-shape': 'triangle',
-                'width': 4,
+                'width': 1,
                 'line-color': '#ddd',
                 'target-arrow-color': '#ddd'
             })
@@ -128,43 +128,17 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
                 'background-color': 'red'
             }),
         layout: {
-            name: 'breadthfirst',
-            directed: false,
-            roots: undefined,
-            padding: 10
-            name: 'circle',
-            fit: true, // whether to fit the viewport to the graph
-            padding: 30, // the padding on fit
+            name: 'random',
+            fit: true, // whether to fit to viewport
+            padding: 10, // fit padding
             boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-            avoidOverlap: true, // prevents node overlap, may overflow boundingBox and radius if not enough space
-            radius: undefined, // the radius of the circle
-            startAngle: 3 / 2 * Math.PI, // the position of the first node
-            counterclockwise: false, // whether the layout should go counterclockwise (true) or clockwise (false)
-            sort: undefined, // a sorting function to order the nodes; e.g. function(a, b){ return a.data('weight') - b.data('weight') }
-            animate: false, // whether to transition the node positions
-            animationDuration: 500, // duration of animation in ms if enabled
+            animate: true, // whether to transition the node positions
+            animationDuration: 1500, // duration of animation in ms if enabled
             ready: undefined, // callback on layoutready
             stop: undefined // callback on layoutstop
 
         }
     });
-
-//    var bfs = cy.elements().bfs('#a', function() {
-//    }, true);
-//
-//    var i = 0;
-//    var highlightNextEle = function() {
-//      bfs.path[i].addClass('highlighted');
-//
-//      if (i < bfs.path.length) {
-//        i++;
-//        setTimeout(highlightNextEle, 1000);
-//      }
-//    };
-//
-//    // kick off first highlight
-//    highlightNextEle();
-
 };
 
 
