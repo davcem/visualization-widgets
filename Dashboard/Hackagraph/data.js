@@ -74,8 +74,8 @@ HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
             id: 'doc_' + doc.index,
             res_index: doc.index
             //parent: 'nparent',
-        }
-        //position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
+        },
+        position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
         /* selected: false,
          selectable: true,
          locked: false,
@@ -97,7 +97,7 @@ HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
                 source: 'doc_' + doc.index,
                 target: 'kw_' + kw
             }
-        }
+        };
         this.processed_data_.edges.push(edge);
     }
 };
@@ -106,8 +106,8 @@ HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
 HACKAGRAPH.DataHandler.prototype.createKwNode_ = function (kw) {
     var node = {
         group: 'nodes',
-        data: {id: 'kw_' + kw, kw_name: kw}
-        //position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)}
+        data: {id: 'kw_' + kw, kw_name: kw},
+        position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)}
     };
 
     this.processed_data_.kws.push(node);
@@ -120,6 +120,5 @@ HACKAGRAPH.DataHandler.prototype.getProcessedData = function () {
     var nodes = [];
     nodes.push.apply(nodes, this.processed_data_.docs);
     nodes.push.apply(nodes, this.processed_data_.kws);
-    //ret.push.apply(ret, this.processed_data_.edges);
     return {nodes: nodes, edges: this.processed_data_.edges};
 };
