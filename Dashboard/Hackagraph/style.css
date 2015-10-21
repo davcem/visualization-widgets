@@ -2,10 +2,13 @@ body {
   font: 14px helvetica neue, helvetica, arial, sans-serif;
 }
 
- #cy {
+#cy {
+  font: 14px helvetica neue, helvetica, arial, sans-serif;
   height: 100%;
   width: 100%;
   position: absolute;
   left: 0;
   top: 0;
+  text-align: justify !important;
+  background-color: lightgray;
 }
