@@ -10,7 +10,7 @@
 	};
 
 	TestPlugin.draw = function(receivedData, mappingCombination, iWidth, iHeight){
-		var $inner = $('<div>Hallo</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
+		var $inner = $('<div id="cy"></div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
 		$root.append($inner);
 	};
 
