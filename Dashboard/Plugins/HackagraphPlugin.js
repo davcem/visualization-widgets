@@ -4,6 +4,7 @@
 	var $root = null;
 	var initializationFinished = false;
 	var afterInitCallback;
+	var hackathon_vis = null;
 
 //	HackagraphPlugin.initialize = function(EEXCESSObj, rootSelector){
 //		$root = $(rootSelector);
@@ -25,10 +26,17 @@
 //                           points = new FilterVisTimeCategoryPoints();
 //                           width = parseInt(d3.select("#eexcess-filtercontainer").style("width"));
                            initializationFinished = true;
+                           
+                           $(function () { // on dom ready
+                               
+                               if(hackathon_vis == null){
+                                   
+                                   hackathon_vis = new HACKAGRAPH.Vis();
+                               
+                               }
+                               
+                           }); // on dom ready
                                  
-                           if (afterInitCallback ){
-                               afterInitCallback();
-                           }
                        }
        });
       
@@ -36,7 +44,10 @@
 
 	HackagraphPlugin.draw = function(receivedData, mappingCombination, iWidth, iHeight){
 		//var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', 'inherit');
-		var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
+		//var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
+		
+		var $inner = $('<div id="cy">We are here to stay</div>');
+		
 		$root.append($inner);
 	};
 

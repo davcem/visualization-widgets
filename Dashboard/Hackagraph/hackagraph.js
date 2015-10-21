@@ -3,15 +3,20 @@ var HACKAGRAPH = HACKAGRAPH || {};
 
 HACKAGRAPH.Vis = function () {
 
-    var pathJS = 'Hackagraph/lib/cytoscape.js';
-    var pathCSS = 'Hackagraph/style.css';
-
-
-
+    var path_js = 'Hackagraph/lib/cytoscape.js';
+    var path_css = 'Hackagraph/style.css';
 
     Modernizr.load({
-        test: pathJS,
-        load: pathJS,
+        test: path_css,
+        load: path_css,
+        complete: function () {
+            console.log("cytoscape css load completed");
+        }.bind(this)
+    });
+
+    Modernizr.load({
+        test: path_js,
+        load: path_js,
         complete: function () {
             console.log("cytoscape load completed");
             this.initializeCytoscape();
@@ -19,6 +24,7 @@ HACKAGRAPH.Vis = function () {
     });
 
     this.data_handler = null;
+    
     var data_handler_path = 'Hackagraph/data.js';
     Modernizr.load({
         test: data_handler_path,
@@ -162,6 +168,3 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape = function () {
 };
 
 
-$(function () { // on dom ready
-    var hackathon_vis = new HACKAGRAPH.Vis();
-}); // on dom ready
