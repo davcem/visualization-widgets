@@ -35,6 +35,7 @@
 };
 
 	HackagraphPlugin.draw = function(receivedData, mappingCombination, iWidth, iHeight){
+		//var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', 'inherit');
 		var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
 		$root.append($inner);
 	};

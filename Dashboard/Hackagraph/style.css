@@ -3,8 +3,8 @@ body {
 }
 
 /* #cy {
-  height: 100%;
-  width: 100%;
+  height: inherit;
+  width: inherit;
   position: absolute;
   left: 0;
   top: 0;
