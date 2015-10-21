@@ -99,7 +99,20 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .stylesheet()
             .selector('node')
             .css({
-                'content': 'data(id)'
+                'content': 'data(id)',
+                'width': '5',
+                'height': '5',
+                'font-weight': 'bold',
+                'font-size': '10',
+                'font-style': 'inherit',
+                'color': 'white',
+                'text-valign': 'center',
+                'text-halign': 'center',
+                'color': '#000',
+                'text-outline-width': '2',
+                'text-outline-color': '#fff',
+                'text-outline-opacity': '1',
+                'overlay-color': '#fff'
             })
             .selector('edge')
             .css({
@@ -117,15 +130,15 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
                 'transition-property': 'background-color, line-color, target-arrow-color',
                 'transition-duration': '0.5s'
             })
-            .selector('node[type="Book"]')
+            .selector('node[type="kw"]')//keyword
             .css(
             {
-                'background-color': 'green'
+                    'text-outline-color': 'green'
             })
-            .selector('node[type="Publication"]')
+            .selector('node[type="doc"]')//document
             .css(
             {
-                'background-color': 'red'
+                'text-outline-color': 'red'
             }),
         layout: {
             name: 'random',
