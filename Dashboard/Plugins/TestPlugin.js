@@ -10,7 +10,7 @@
 	};
 
 	TestPlugin.draw = function(receivedData, mappingCombination, iWidth, iHeight){
-		var $inner = $('<div>Hallo</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
+		var $inner = $('<div>Hallo 176</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
 		$root.append($inner);
 	};
 
@@ -22,6 +22,6 @@
 	};
 	
 	PluginHandler.registerVisualisation(TestPlugin, {
-		'displayName' : 'hackagraph', 
+		'displayName' : 'TestPlugin', 
 	});
 })();
