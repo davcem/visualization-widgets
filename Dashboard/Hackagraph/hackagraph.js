@@ -58,7 +58,36 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
     cy = cytoscape({
         container: document.getElementById('cy'),
-
+        //initial viewport state:
+        zoom: 1,
+        pan: { x: 0, y: 0 },
+        // interaction options:
+        minZoom: 1,
+        maxZoom: 2,
+        zoomingEnabled: true,
+        userZoomingEnabled: true,
+        panningEnabled: true,
+        userPanningEnabled: false,
+        boxSelectionEnabled: false,
+        selectionType: 'single',
+        touchTapThreshold: 8,
+        desktopTapThreshold: 4,
+        autolock: false,
+        autoungrabify: false,
+        autounselectify: false,
+        // rendering options:
+        headless: false,
+        styleEnabled: true,
+        hideEdgesOnViewport: false,
+        hideLabelsOnViewport: false,
+        textureOnViewport: false,
+        motionBlur: true,
+        motionBlurOpacity: 0.2,
+        wheelSensitivity: 1,
+        pixelRatio: 1,
+        initrender: function(evt){ /* ... */ },
+        renderer: { /* ... */ },
+        //Style
         style: cytoscape
             .stylesheet()
             .selector('node')
