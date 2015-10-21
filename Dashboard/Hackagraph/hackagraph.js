@@ -58,10 +58,13 @@ HACKAGRAPH.Vis.prototype.update = function (graph_data) {
 HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
     console.log("cytoscape initialize start");
-    console.log(this.graph_data);
+    console.log(JSON.stringify(this.graph_data));
+    
+    //elements: this.graph_data
 
     cy = cytoscape({
         container: document.getElementById('cy'),
+        elements: this.graph_data,
         //initial viewport state:
         zoom: 1,
         pan: { x: 0, y: 0 },
@@ -96,12 +99,12 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .stylesheet()
             .selector('node')
             .css({
-                'content': 'data(titel)'
+                'content': 'data(id)'
             })
             .selector('edge')
             .css({
                 'target-arrow-shape': 'triangle',
-                'width': 4,
+                'width': 1,
                 'line-color': '#ddd',
                 'target-arrow-color': '#ddd'
             })
@@ -124,21 +127,11 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             {
                 'background-color' : 'red'
             }),
-        elements: this.graph_data,
         layout: {      
-            name: 'circle',
-            fit: true, // whether to fit the viewport to the graph
-            padding: 30, // the padding on fit
-            boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-            avoidOverlap: true, // prevents node overlap, may overflow boundingBox and radius if not enough space
-            radius: undefined, // the radius of the circle
-            startAngle: 3/2 * Math.PI, // the position of the first node
-            counterclockwise: false, // whether the layout should go counterclockwise (true) or clockwise (false)
-            sort: undefined, // a sorting function to order the nodes; e.g. function(a, b){ return a.data('weight') - b.data('weight') }
-            animate: false, // whether to transition the node positions
-            animationDuration: 500, // duration of animation in ms if enabled
-            ready: undefined, // callback on layoutready
-            stop: undefined // callback on layoutstop
+            name: 'breadthfirst',
+            directed: false,
+            roots: undefined,
+            padding: 10
 
         }
     });
