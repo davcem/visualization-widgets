@@ -7,12 +7,24 @@ HACKAGRAPH.Vis = function () {
     var pathCSS = 'Hackagraph/style.css';
 
 
+
+
     Modernizr.load({
         test: pathJS,
         load: pathJS,
         complete: function () {
             console.log("cytoscape load completed");
             this.initializeCytoscape();
+        }.bind(this)
+    });
+
+    this.data_handler = null;
+    var data_handler_path = 'Hackagraph/data.js';
+    Modernizr.load({
+        test: data_handler_path,
+        load: data_handler_path,
+        complete: function () {
+            this.data_handler = new HACKAGRAPH.DataHandler();
         }.bind(this)
     });
 };
