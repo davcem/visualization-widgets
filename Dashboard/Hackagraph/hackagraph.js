@@ -2,7 +2,19 @@ var HACKAGRAPH = HACKAGRAPH || {};
 
 
 HACKAGRAPH.Vis = function () {
-    this.initializeCytoscape();
+
+    var pathJS = 'Hackagraph/lib/cytoscape.js';
+    var pathCSS = 'Hackagraph/style.css';
+
+
+    Modernizr.load({
+        test: pathJS,
+        load: pathJS,
+        complete: function () {
+            console.log("cytoscape load completed");
+            this.initializeCytoscape();
+        }.bind(this)
+    });
 };
 
 
