@@ -3,7 +3,8 @@
     var HackagraphPlugin = {};
     var $root = null;
     var initializationFinished = false;
-    var afterInitCallback;
+
+    /** @type{HACKAGRAPH.Vis} **/
     var hackathon_vis = null;
 
 //	HackagraphPlugin.initialize = function(EEXCESSObj, rootSelector){
@@ -44,13 +45,15 @@
     };
 
     HackagraphPlugin.draw = function (receivedData, mappingCombination, iWidth, iHeight) {
+
+        console.log(receivedData);
         //var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', 'inherit');
         //var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
 
         var $inner = $('<div id="cy">We are here to stay</div>');
         $root.append($inner);
 
-        hackathon_vis.init();
+        hackathon_vis.init(receivedData);
     };
 
     // indexArray: array with items' indices to highlight. They match items in receivedData (parameter in Render.draw)
