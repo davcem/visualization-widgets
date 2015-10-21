@@ -44,10 +44,10 @@
     };
 
     HackagraphPlugin.draw = function (receivedData, mappingCombination, iWidth, iHeight) {
-        //var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', 'inherit');
-        //var $inner = $('<div id="cy">We are here to stay</div>').css('background-color', 'lightgrey').css('height', '100%').css('padding-top', '50px');
-
+        //var $inner = $('<div id="cy">Hackagraph</div><div id="search-wrapper" style="display: none;"><input type="text" class="form-control" id="search" autofocus placeholder="Search"></div>');
+        
         var $inner = $('<div id="cy">Hackagraph</div>');
+        
         $root.append($inner);
 
         hackathon_vis.init();
