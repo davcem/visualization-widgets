@@ -20,14 +20,6 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
         }.bind(this)
     });
 
-    Modernizr.load({
-        test: path_js,
-        load: path_js,
-        complete: function () {
-            console.log("cytoscape load completed");
-            this.initializeCytoscape_();
-        }.bind(this)
-    });
 
     var data_handler_path = 'Hackagraph/data.js';
     Modernizr.load({
@@ -38,6 +30,15 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             this.data_handler_.processData();
             var graph_data = this.data_handler_.getProcessedData();
             this.update(graph_data)
+
+            Modernizr.load({
+                test: path_js,
+                load: path_js,
+                complete: function () {
+                    console.log("cytoscape load completed");
+                    this.initializeCytoscape_();
+                }.bind(this)
+            });
         }.bind(this)
     });
 }
@@ -47,9 +48,9 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
  * @param {array} data  Processed data by the @see{HACKAGRAPH.DataHandler}
  */
 HACKAGRAPH.Vis.prototype.update = function (graph_data) {
-    
+
     this.graph_data = graph_data;
-    
+
     //Update the graph here!
     console.log("UPDATING THE GRAPH WITH DATA ", graph_data);
 
@@ -64,7 +65,7 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
         container: document.getElementById('cy'),
         //initial viewport state:
         zoom: 1,
-        pan: { x: 0, y: 0 },
+        pan: {x: 0, y: 0},
         // interaction options:
         minZoom: 1,
         maxZoom: 2,
@@ -89,8 +90,9 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
         motionBlurOpacity: 0.2,
         wheelSensitivity: 1,
         pixelRatio: 1,
-        initrender: function(evt){ /* ... */ },
-        renderer: { /* ... */ },
+        initrender: function (evt) { /* ... */
+        },
+        renderer: {/* ... */},
         //Style
         style: cytoscape
             .stylesheet()
@@ -117,22 +119,22 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .selector('node[type="Book"]')
             .css(
             {
-                'background-color' : 'green'
+                'background-color': 'green'
             })
             .selector('node[type="Publication"]')
             .css(
             {
-                'background-color' : 'red'
+                'background-color': 'red'
             }),
         elements: this.graph_data,
-        layout: {      
+        layout: {
             name: 'circle',
             fit: true, // whether to fit the viewport to the graph
             padding: 30, // the padding on fit
             boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
             avoidOverlap: true, // prevents node overlap, may overflow boundingBox and radius if not enough space
             radius: undefined, // the radius of the circle
-            startAngle: 3/2 * Math.PI, // the position of the first node
+            startAngle: 3 / 2 * Math.PI, // the position of the first node
             counterclockwise: false, // whether the layout should go counterclockwise (true) or clockwise (false)
             sort: undefined, // a sorting function to order the nodes; e.g. function(a, b){ return a.data('weight') - b.data('weight') }
             animate: false, // whether to transition the node positions
