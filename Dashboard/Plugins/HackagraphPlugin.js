@@ -45,10 +45,19 @@
 
     HackagraphPlugin.draw = function (receivedData, mappingCombination, iWidth, iHeight) {
         //var $inner = $('<div id="cy">Hackagraph</div><div id="search-wrapper" style="display: none;"><input type="text" class="form-control" id="search" autofocus placeholder="Search"></div>');
-        
+
         var $inner = $('<div id="cy">Hackagraph</div>');
-        
+
         $root.append($inner);
+
+        /**
+         * Limit results!
+         */
+        var max_items = 10;
+        if (receivedData.length > max_items)
+            receivedData = receivedData.slice(0, max_items);
+
+        console.log(receivedData);
 
         hackathon_vis.init(receivedData);
     };
