@@ -1,4 +1,5 @@
 var HACKAGRAPH = HACKAGRAPH || {};
+var cy;
 
 
 HACKAGRAPH.Vis = function () {
@@ -11,10 +12,37 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
 
     var path_js = 'Hackagraph/lib/cytoscape.js';
     var path_css = 'Hackagraph/style.css';
+    var path_cy_qtip = 'Hackagraph/lib/cytoscape-qtip.js';
+    var path_jq_qtip_css = 'Hackagraph/lib/jquery.qtip.min.css';
+    var path_jq_qtip_js = 'Hackagraph/lib/jquery.qtip.min.js';
 
     Modernizr.load({
         test: path_css,
         load: path_css,
+        complete: function () {
+            console.log("cytoscape css load completed");
+        }.bind(this)
+    });
+    
+    Modernizr.load({
+        test: path_cy_qtip,
+        load: path_cy_qtip,
+        complete: function () {
+            console.log("cytoscape css load completed");
+        }.bind(this)
+    });
+    
+    Modernizr.load({
+        test: path_jq_qtip_css,
+        load: path_jq_qtip_css,
+        complete: function () {
+            console.log("cytoscape css load completed");
+        }.bind(this)
+    });
+    
+    Modernizr.load({
+        test: path_jq_qtip_js,
+        load: path_jq_qtip_js,
         complete: function () {
             console.log("cytoscape css load completed");
         }.bind(this)
@@ -152,6 +180,19 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
         }
     });
+    
+//    cy.$('#n').qtip({
+//        content: 'data(id)',
+//        position: {
+//          my: 'top center',
+//          at: 'bottom center'
+//        },
+//        style: {
+//          classes: 'qtip-bootstrap',
+//          tip: {
+//            width: 10,
+//            height: 10
+//          }
+//        }
+//      });
 };
-
-
