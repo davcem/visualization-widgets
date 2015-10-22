@@ -50,12 +50,6 @@
 
         $root.append($inner);
 
-        /**
-         * Limit results!
-         */
-        var max_items = 10;
-        if (receivedData.length > max_items)
-            receivedData = receivedData.slice(0, max_items);
 
         console.log(receivedData);
 

@@ -46,24 +46,52 @@ HACKAGRAPH.DataHandler.prototype.fetchNewData = function () {
  */
 HACKAGRAPH.DataHandler.prototype.processData = function () {
 
-    var all_kws = [];
+    var all_kws = {};
     var docs = [];
+
+    /**
+     * Create Doc-Nodes and collect keywords and their weights
+     */
     for (var i = 0; i < this.e_data_.length; i++) {
 
         var res = this.e_data_[i];
         var tmp_kws = [];
         for (var kw_key in res.keywords) {
             var kw_weight = res.keywords[kw_key];
-            if (all_kws.indexOf(kw_key) === -1) {
-                all_kws.push(kw_key);
-                all_kws.push(kw_key);
+            if (all_kws[kw_key] === undefined) {
+                all_kws[kw_key] = [];
                 tmp_kws.push(kw_key);
-                this.createKwNode_(kw_key);
             }
+            all_kws[kw_key].push(kw_weight);
         }
 
         this.createDocNode_(res, tmp_kws);
     }
+
+
+    /**
+     * Finally create Keyword-Nodes
+     */
+    /*
+    for (var kw in all_kws) {
+
+        var kw_inner_count = all_kws[kw].length;
+
+        //Get average ranking of this kw
+        var rank_sum =0;
+        for (var i=0; i< kw_inner_count; i++)
+            rank_sum += all_kws[kw][i];
+        rank_sum /= kw_inner_count;
+
+        //If kw appeared more than
+        var count_fact = 1.5;
+        kw_weight = 0;
+        this.createKwNode_(kw_key, kw_weight);
+    }
+    */
+
+    for (var i=0; i<this.e_data_.keywords.length; i++)
+        this.createKwNode_(this.e_data_.keywords[i].term, this.e_data_.keywords[i].stem, this.e_data_.keywords.length - i);
 };
 
 HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
@@ -98,18 +126,19 @@ HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
 };
 
 
-HACKAGRAPH.DataHandler.prototype.createKwNode_ = function (kw) {
+HACKAGRAPH.DataHandler.prototype.createKwNode_ = function (kw, kw_id, weight) {
     var node = {
         group: 'nodes',
         data: {
-            id: 'kw_' + kw,
+            id: 'kw_' + kw_id,
             kw_name: kw,
-            type: 'kw'
+            type: 'kw',
+            weight: weight
         },
         position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
 
     };
-
+    console.log(node);
     this.processed_data_.kws.push(node);
 };
 
