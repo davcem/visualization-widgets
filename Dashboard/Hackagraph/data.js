@@ -77,16 +77,21 @@ HACKAGRAPH.DataHandler.prototype.processData = function () {
 };
 
 HACKAGRAPH.DataHandler.prototype.createDocNode_ = function (doc, kws) {
+    var title = doc.title;
+    var max_length = 14;
+    if (title.length > max_length + 3)
+        title = title.substr(0, max_length) + "...";
 
-    var node = {
-        group: 'nodes',
-        data: {
-            id: 'doc_' + doc.index,
-            res_index: doc.index,
-            type: 'doc'
-        },
-        position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
-    };
+        var node = {
+            group: 'nodes',
+            data: {
+                id: 'doc_' + doc.index,
+                res_index: doc.index,
+                type: 'doc',
+                title: title
+            },
+            position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
+        };
 
     this.processed_data_.docs.push(node);
 

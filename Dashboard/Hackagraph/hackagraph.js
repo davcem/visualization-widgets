@@ -62,14 +62,14 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             this.update(graph_data);
 
 
-            this.initKwSelectBox();
-
             Modernizr.load({
                 test: path_js,
                 load: path_js,
                 complete: function () {
                     console.log("cytoscape load completed");
                     this.initializeCytoscape_();
+
+                    this.initKwSelectBox();
                 }.bind(this)
             });
         }.bind(this)
@@ -141,6 +141,10 @@ HACKAGRAPH.Vis.prototype.initKwSelectBox = function () {
         $('.hackagraph_kw_selector_elm').click(function (data) {
             this.onKwSelectorCheckboxClick($(data.target));
         }.bind(this));
+
+        for (var i = 0; i < 10; i++) {
+            $('.hackagraph_kw_selector_elm')[i].click();
+        }
     }.bind(this))
 
 }
@@ -160,7 +164,7 @@ HACKAGRAPH.Vis.prototype.update = function (graph_data) {
 
 HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
-   // console.log("cytoscape initialize start");
+    // console.log("cytoscape initialize start");
 
     cy = cytoscape({
         container: document.getElementById('cy'),
@@ -235,12 +239,15 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .css(
             {
                 'text-outline-color': 'green',
-                'visibility' : 'hidden',
-                'display' : 'none'
+                //'visibility' : 'hidden',
+                'display': 'none',
+                'content': 'data(kw_name)'
+
             })
             .selector('node[type="doc"]')//document
             .css(
             {
+                'content': 'data(title)',
                 'text-outline-color': 'red'
             }),
         layout: {
@@ -257,7 +264,7 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
     });
 
 
-   // cy.$("[type = 'kw']").hide();
+    // cy.$("[type = 'kw']").hide();
 
 //    cy.$('#n').qtip({
 //        content: 'data(id)',
