@@ -208,13 +208,12 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
                 'width': '5',
                 'height': '5',
                 'font-weight': 'bold',
-                'font-size': '10',
+                'font-size': '9',
                 'font-style': 'inherit',
-                'color': 'white',
                 'text-valign': 'center',
                 'text-halign': 'center',
                 'color': '#000',
-                'text-outline-width': '2',
+                'text-outline-width': '0',
                 'text-outline-color': '#fff',
                 'text-outline-opacity': '1',
                 'overlay-color': '#fff'
@@ -223,8 +222,8 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .css({
                 'target-arrow-shape': 'triangle',
                 'width': 1,
-                'line-color': '#ddd',
-                'target-arrow-color': '#ddd'
+                'line-color': '#aaaaaa',
+                'target-arrow-color': '#aaaaaa'
             })
             .selector('.highlighted')
             .css(
@@ -238,7 +237,8 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .selector('node[type="kw"]')//keyword
             .css(
             {
-                'text-outline-color': 'green',
+                //'text-outline-color': 'green',
+                'color': 'green',
                 //'visibility' : 'hidden',
                 'display': 'none',
                 'content': 'data(kw_name)'
@@ -248,7 +248,8 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .css(
             {
                 'content': 'data(title)',
-                'text-outline-color': 'red'
+                //'text-outline-color': 'red'
+                'color': 'red'
             }),
         layout: {
             name: 'random',
