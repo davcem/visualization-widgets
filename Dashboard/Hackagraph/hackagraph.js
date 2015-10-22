@@ -61,6 +61,7 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             var graph_data = this.data_handler_.getProcessedData();
             this.update(graph_data);
 
+
             this.initKwSelectBox();
 
             Modernizr.load({
@@ -81,8 +82,19 @@ HACKAGRAPH.Vis.prototype.onKwSelectorCheckboxClick = function (element) {
     var checkbox = $(element.children('input')[0]);
     var target_id = checkbox.attr("target");
 
-    alert(target_id);
+    var checked = checkbox.is(':checked');
 
+    this.setKwNodeVisibility(target_id, !checked);
+
+    checkbox.prop("checked", !checked);
+};
+
+HACKAGRAPH.Vis.prototype.setKwNodeVisibility = function (kw_id, visible) {
+
+    if (visible)
+        cy.$("#" + kw_id).show();
+    else
+        cy.$("#" + kw_id).hide();
 };
 
 HACKAGRAPH.Vis.prototype.onKwSelectorListClick = function () {
@@ -135,7 +147,7 @@ HACKAGRAPH.Vis.prototype.initKwSelectBox = function () {
 
 /**
  *
- * @param {array} data  Processed data by the @see{HACKAGRAPH.DataHandler}
+ * @param {array} graph_data  Processed data by the @see{HACKAGRAPH.DataHandler}
  */
 HACKAGRAPH.Vis.prototype.update = function (graph_data) {
 
@@ -148,7 +160,7 @@ HACKAGRAPH.Vis.prototype.update = function (graph_data) {
 
 HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
-    console.log("cytoscape initialize start");
+   // console.log("cytoscape initialize start");
 
     cy = cytoscape({
         container: document.getElementById('cy'),
@@ -222,7 +234,9 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .selector('node[type="kw"]')//keyword
             .css(
             {
-                'text-outline-color': 'green'
+                'text-outline-color': 'green',
+                'visibility' : 'hidden',
+                'display' : 'none'
             })
             .selector('node[type="doc"]')//document
             .css(
@@ -241,6 +255,9 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
         }
     });
+
+
+   // cy.$("[type = 'kw']").hide();
 
 //    cy.$('#n').qtip({
 //        content: 'data(id)',
