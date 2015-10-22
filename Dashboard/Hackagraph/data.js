@@ -72,25 +72,7 @@ HACKAGRAPH.DataHandler.prototype.processData = function () {
     /**
      * Finally create Keyword-Nodes
      */
-    /*
-    for (var kw in all_kws) {
-
-        var kw_inner_count = all_kws[kw].length;
-
-        //Get average ranking of this kw
-        var rank_sum =0;
-        for (var i=0; i< kw_inner_count; i++)
-            rank_sum += all_kws[kw][i];
-        rank_sum /= kw_inner_count;
-
-        //If kw appeared more than
-        var count_fact = 1.5;
-        kw_weight = 0;
-        this.createKwNode_(kw_key, kw_weight);
-    }
-    */
-
-    for (var i=0; i<this.e_data_.keywords.length; i++)
+    for (var i = 0; i < this.e_data_.keywords.length; i++)
         this.createKwNode_(this.e_data_.keywords[i].term, this.e_data_.keywords[i].stem, this.e_data_.keywords.length - i);
 };
 
@@ -138,7 +120,6 @@ HACKAGRAPH.DataHandler.prototype.createKwNode_ = function (kw, kw_id, weight) {
         position: {x: parseInt(Math.random() * 400), y: parseInt(Math.random() * 300)},
 
     };
-    console.log(node);
     this.processed_data_.kws.push(node);
 };
 
@@ -151,3 +132,7 @@ HACKAGRAPH.DataHandler.prototype.getProcessedData = function () {
     nodes.push.apply(nodes, this.processed_data_.kws);
     return {nodes: nodes, edges: this.processed_data_.edges};
 };
+
+HACKAGRAPH.DataHandler.prototype.getKwNodes = function () {
+    return this.processed_data_.kws;
+}

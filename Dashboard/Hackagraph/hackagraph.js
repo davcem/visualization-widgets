@@ -5,6 +5,8 @@ var cy;
 HACKAGRAPH.Vis = function () {
     this.data_handler_ = null;
     this.graph_data = [];
+
+    this.kw_list_open = false;
 };
 
 
@@ -23,7 +25,7 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             console.log("cytoscape css load completed");
         }.bind(this)
     });
-    
+
     Modernizr.load({
         test: path_cy_qtip,
         load: path_cy_qtip,
@@ -31,7 +33,7 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             console.log("cytoscape css load completed");
         }.bind(this)
     });
-    
+
     Modernizr.load({
         test: path_jq_qtip_css,
         load: path_jq_qtip_css,
@@ -39,7 +41,7 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             console.log("cytoscape css load completed");
         }.bind(this)
     });
-    
+
     Modernizr.load({
         test: path_jq_qtip_js,
         load: path_jq_qtip_js,
@@ -57,7 +59,9 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             this.data_handler_ = new HACKAGRAPH.DataHandler(this, data);
             this.data_handler_.processData();
             var graph_data = this.data_handler_.getProcessedData();
-            this.update(graph_data)
+            this.update(graph_data);
+
+            this.initKwSelectBox();
 
             Modernizr.load({
                 test: path_js,
@@ -69,6 +73,64 @@ HACKAGRAPH.Vis.prototype.init = function (data) {
             });
         }.bind(this)
     });
+
+
+};
+
+HACKAGRAPH.Vis.prototype.onKwSelectorCheckboxClick = function (element) {
+    var checkbox = $(element.children('input')[0]);
+    var target_id = checkbox.attr("target");
+
+    alert(target_id);
+
+};
+
+HACKAGRAPH.Vis.prototype.onKwSelectorListClick = function () {
+
+    var $list = $('#hackagraph_kw_selector_container');
+    if (this.kw_list_open) {            //CLOSE IT
+        $list.css('height', '25px');
+        $list.css('overflow', 'none');
+    } else {                            //OPEN IT
+
+        $list.css('height', '100%');
+        $list.css('overflow', 'auto');
+    }
+
+    this.kw_list_open = !this.kw_list_open;
+};
+
+/**
+ * Building a nice box for selecting keywords
+ */
+HACKAGRAPH.Vis.prototype.initKwSelectBox = function () {
+    var kw_nodes = this.data_handler_.getKwNodes();
+
+    var $list = $('#hackagraph_kw_selector_list');
+
+    //For better performance create long html string and push it only once
+    var list_html = "";
+    for (var i = 0; i < kw_nodes.length; i++) {
+        var kwnode = kw_nodes[i];
+        var list_elm = "<li class='hackagraph_kw_selector_elm' id='hackagraph_kw_selector_elm_" + kwnode.data.id + "'>" +
+            "<input type='checkbox' target='" + kwnode.data.id + "' />" + kwnode.data.kw_name + "</li>";
+
+        list_html += list_elm;
+    }
+
+    $list.append(list_html);
+
+
+    $(document).ready(function () {
+        $('#hackagraph_kw_selector_container > h3').click(function () {
+            this.onKwSelectorListClick();
+        }.bind(this));
+
+        $('.hackagraph_kw_selector_elm').click(function (data) {
+            this.onKwSelectorCheckboxClick($(data.target));
+        }.bind(this));
+    }.bind(this))
+
 }
 
 /**
@@ -87,7 +149,6 @@ HACKAGRAPH.Vis.prototype.update = function (graph_data) {
 HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
     console.log("cytoscape initialize start");
-    console.log(this.graph_data);
 
     cy = cytoscape({
         container: document.getElementById('cy'),
@@ -161,7 +222,7 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .selector('node[type="kw"]')//keyword
             .css(
             {
-                    'text-outline-color': 'green'
+                'text-outline-color': 'green'
             })
             .selector('node[type="doc"]')//document
             .css(
@@ -180,7 +241,7 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
 
         }
     });
-    
+
 //    cy.$('#n').qtip({
 //        content: 'data(id)',
 //        position: {

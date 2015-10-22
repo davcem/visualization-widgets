@@ -46,7 +46,7 @@
     HackagraphPlugin.draw = function (receivedData, mappingCombination, iWidth, iHeight) {
         //var $inner = $('<div id="cy">Hackagraph</div><div id="search-wrapper" style="display: none;"><input type="text" class="form-control" id="search" autofocus placeholder="Search"></div>');
 
-        var $inner = $('<div id="cy">Hackagraph</div>');
+        var $inner = $('<div id="cy">Hackagraph<div id ="hackagraph_kw_selector_container"><h3>Keywords</h3><ul id="hackagraph_kw_selector_list"></ul></div></div>');
 
         $root.append($inner);
 
