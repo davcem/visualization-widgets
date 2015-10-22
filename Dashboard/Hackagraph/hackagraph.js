@@ -205,8 +205,8 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .selector('node')
             .css({
                 'content': 'data(id)',
-                'width': '5',
-                'height': '5',
+                'width': '1',
+                'height': '1',
                 'font-weight': 'bold',
                 'font-size': '9',
                 'font-style': 'inherit',
@@ -222,7 +222,7 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .css({
                 'target-arrow-shape': 'triangle',
                 'width': 1,
-                'line-color': '#aaaaaa',
+                'line-color': '#000000',
                 'target-arrow-color': '#aaaaaa'
             })
             .selector('.highlighted')
@@ -238,18 +238,17 @@ HACKAGRAPH.Vis.prototype.initializeCytoscape_ = function () {
             .css(
             {
                 //'text-outline-color': 'green',
-                'color': 'green',
+                'color': '#529CBF',
                 //'visibility' : 'hidden',
                 'display': 'none',
                 'content': 'data(kw_name)'
-
             })
             .selector('node[type="doc"]')//document
             .css(
             {
                 'content': 'data(title)',
                 //'text-outline-color': 'red'
-                'color': 'red'
+                'color': '#000000'
             }),
         layout: {
             name: 'random',
